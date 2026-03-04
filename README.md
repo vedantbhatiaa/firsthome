@@ -4,36 +4,7 @@
 
 Built with **Python (Flask + numpy_financial)** backend and a **pure HTML/CSS/JS** frontend.
 
----
 
-## 📐 Project Structure
-
-```
-firsthome/
-├── frontend/                   # Static frontend (HTML/CSS/JS)
-│   ├── index.html              # Main application page
-│   ├── css/
-│   │   └── style.css           # All styles (dark theme, animations)
-│   └── js/
-│       ├── api.js              # API client + local fallback calculators
-│       └── ui.js               # UI rendering, tab management, animations
-│
-├── backend/                    # Flask REST API
-│   ├── app.py                  # Application factory + entry point
-│   ├── requirements.txt        # Python dependencies
-│   ├── calculators/            # numpy_financial calculation modules
-│   │   ├── __init__.py
-│   │   ├── affordability.py    # Max price, DTI, stress testing
-│   │   ├── mortgage.py         # EMI, full amortisation schedule
-│   │   ├── rent_vs_buy.py      # NPV-based wealth comparison
-│   │   └── savings.py          # PMT savings goal planner
-│   └── routes/
-│       ├── __init__.py
-│       └── api.py              # All /api/* endpoints
-│
-├── README.md
-└── .gitignore
-```
 
 ---
 
@@ -158,35 +129,8 @@ All endpoints accept and return JSON.
 
 The frontend includes **full local fallback calculators** in `api.js`. If the Flask backend is unavailable, all four tools continue to work using JavaScript implementations of the same financial formulas. The API status badge in the nav shows the connection state.
 
----
 
-## 🎨 Design Principles
 
-- **Dark, warm-gold palette** — premium feel vs. sterile white/blue of competitors
-- **Cormorant Garamond** serif for financial figures — gravitas and readability
-- **Custom animated cursor** with magnetic ring
-- **Live calculations** — every slider drag triggers recalculation
-- **No ads, no sign-ups, no third-party trackers**
-
----
-
-## 🛣️ Roadmap (Next Steps)
-
-- [ ] Chart.js amortisation visualisation (interactive area chart)
-- [ ] PDF export of full financial summary report
-- [ ] Property-specific stamp duty calculator (UK bands)
-- [ ] Historic mortgage rate integration (Bank of England API)
-- [ ] Shared results via URL params
-- [ ] Dark/light mode toggle
-
----
-
-## 🏫 Context
-
-Built as part of UCL MSc Business Analytics FinTech module.
-Demonstrates: `numpy_financial`, REST API design, full-stack architecture, financial modelling.
-
----
 
 ## 📄 License
 
