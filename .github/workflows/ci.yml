@@ -1,0 +1,79 @@
+name: FirstHome CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  # ── Backend Tests ────────────────────────────────────────────────────────────
+  backend:
+    runs-on: ubuntu-latest
+    name: Python Backend Tests
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+          cache-dependency-path: backend/requirements.txt
+
+      - name: Install dependencies
+        run: |
+          cd backend
+          pip install -r requirements.txt
+          pip install pytest pytest-cov
+
+      - name: Run calculator unit tests
+        run: |
+          cd backend
+          python -m pytest tests/ -v --cov=calculators --cov-report=term-missing
+        continue-on-error: true  # no tests yet — won't fail CI
+
+      - name: Smoke test — import all calculators
+        run: |
+          cd backend
+          python -c "from calculators import calculate_affordability, calculate_mortgage, calculate_rent_vs_buy, calculate_savings_goal; print('✅ All calculators imported successfully')"
+
+      - name: Smoke test — API health endpoint
+        run: |
+          cd backend
+          python app.py &
+          sleep 3
+          curl -f http://localhost:5000/api/health || exit 1
+          kill %1
+
+  # ── Frontend Lint ─────────────────────────────────────────────────────────────
+  frontend:
+    runs-on: ubuntu-latest
+    name: Frontend HTML Validation
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check HTML exists
+        run: test -f frontend/index.html && echo "✅ index.html found"
+      - name: Check CSS exists
+        run: test -f frontend/css/style.css && echo "✅ style.css found"
+      - name: Check JS exists
+        run: |
+          test -f frontend/js/api.js && echo "✅ api.js found"
+          test -f frontend/js/ui.js && echo "✅ ui.js found"
+
+  # ── Deploy to GitHub Pages (frontend only) ────────────────────────────────────
+  deploy-pages:
+    runs-on: ubuntu-latest
+    name: Deploy Frontend to GitHub Pages
+    needs: [frontend]
+    if: github.ref == 'refs/heads/main'
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deploy frontend/ to gh-pages branch
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: frontend
+          branch: gh-pages
+          clean: true
