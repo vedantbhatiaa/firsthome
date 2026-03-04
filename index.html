@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="FirstHome — The all-in-one financial companion for first-time homebuyers. Affordability calculator, mortgage planner, rent vs buy analysis, and savings goal tracker.">
+  <title>FirstHome — Your Path to Homeownership</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- Custom cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- ─── NAVIGATION ──────────────────────────────────────────────────────── -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">
+    <div class="logo-icon">🏠</div>
+    First<span>Home</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#tools">Calculators</a></li>
+    <li><a href="#compare">Compare</a></li>
+    <li>
+      <div class="api-status">
+        <span class="api-dot checking" id="api-dot"></span>
+        <span id="api-label">Connecting...</span>
+      </div>
+    </li>
+    <li><a href="#tools" class="nav-cta">Get Started →</a></li>
+  </ul>
+</nav>
+
+<!-- ─── HERO ────────────────────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="grid-bg"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <div class="hero-content">
+    <div class="hero-tag">
+      <span class="hero-tag-dot"></span>
+      The Smarter Way to Buy Your First Home
+    </div>
+
+    <h1 class="hero-title">
+      <span class="line">Your <em>dream home</em></span>
+      <span class="line">starts with the</span>
+      <span class="line">right <em>numbers.</em></span>
+    </h1>
+
+    <p class="hero-sub">
+      Four powerful tools. One clear journey. From what you can afford
+      to whether renting beats buying — FirstHome gives you the financial
+      clarity no mortgage broker will.
+    </p>
+
+    <div class="hero-actions">
+      <a href="#tools" class="btn-primary">
+        Start Calculating
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+      <button class="btn-ghost" onclick="document.getElementById('compare').scrollIntoView({behavior:'smooth'})">
+        See how we compare
+      </button>
+    </div>
+  </div>
+
+  <!-- Floating house illustration -->
+  <div class="hero-visual">
+    <svg class="house-svg" viewBox="0 0 480 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="240" cy="400" rx="180" ry="16" fill="rgba(0,0,0,0.3)"/>
+      <rect x="80" y="210" width="320" height="190" rx="8" fill="#1C2420"/>
+      <rect x="80" y="210" width="320" height="190" rx="8" stroke="rgba(200,169,110,0.2)" stroke-width="1.5"/>
+      <path d="M60 215 L240 80 L420 215Z" fill="#243029" stroke="rgba(200,169,110,0.25)" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M60 215 L240 80 L420 215" stroke="#C8A96E" stroke-width="2" stroke-linejoin="round" opacity="0.6"/>
+      <rect x="310" y="100" width="30" height="60" rx="4" fill="#1C2420" stroke="rgba(200,169,110,0.2)" stroke-width="1"/>
+      <circle cx="320" cy="88" r="5" fill="rgba(200,169,110,0.15)" class="smoke"/>
+      <circle cx="330" cy="72" r="4" fill="rgba(200,169,110,0.1)" class="smoke"/>
+      <circle cx="315" cy="58" r="3" fill="rgba(200,169,110,0.07)" class="smoke"/>
+      <rect x="200" y="305" width="80" height="95" rx="6" fill="#111714" stroke="rgba(200,169,110,0.3)" stroke-width="1.5"/>
+      <circle cx="270" cy="358" r="5" fill="#C8A96E" opacity="0.8"/>
+      <path d="M200 315 Q240 285 280 315" fill="none" stroke="rgba(200,169,110,0.3)" stroke-width="1.5"/>
+      <rect x="105" y="245" width="75" height="65" rx="6" fill="#111714" stroke="rgba(200,169,110,0.25)" stroke-width="1.5"/>
+      <line x1="142" y1="245" x2="142" y2="310" stroke="rgba(200,169,110,0.15)" stroke-width="1"/>
+      <line x1="105" y1="277" x2="180" y2="277" stroke="rgba(200,169,110,0.15)" stroke-width="1"/>
+      <rect x="105" y="245" width="75" height="65" rx="6" fill="rgba(200,169,110,0.05)"/>
+      <rect x="300" y="245" width="75" height="65" rx="6" fill="#111714" stroke="rgba(200,169,110,0.25)" stroke-width="1.5"/>
+      <line x1="337" y1="245" x2="337" y2="310" stroke="rgba(200,169,110,0.15)" stroke-width="1"/>
+      <line x1="300" y1="277" x2="375" y2="277" stroke="rgba(200,169,110,0.15)" stroke-width="1"/>
+      <rect x="300" y="245" width="75" height="65" rx="6" fill="rgba(200,169,110,0.05)"/>
+      <path d="M240 400 L240 340" stroke="rgba(200,169,110,0.15)" stroke-width="24" stroke-linecap="round"/>
+      <circle cx="155" cy="395" r="18" fill="#1C2420" stroke="rgba(94,158,126,0.3)" stroke-width="1.5"/>
+      <circle cx="175" cy="390" r="14" fill="#243029" stroke="rgba(94,158,126,0.2)" stroke-width="1"/>
+      <circle cx="300" cy="395" r="18" fill="#1C2420" stroke="rgba(94,158,126,0.3)" stroke-width="1.5"/>
+      <circle cx="280" cy="390" r="14" fill="#243029" stroke="rgba(94,158,126,0.2)" stroke-width="1"/>
+      <!-- Floating data labels -->
+      <g opacity="0.7">
+        <rect x="10" y="160" width="110" height="44" rx="10" fill="#1C2420" stroke="rgba(200,169,110,0.2)" stroke-width="1"/>
+        <text x="22" y="178" font-family="DM Sans" font-size="9" fill="rgba(200,169,110,0.6)">MONTHLY EMI</text>
+        <text x="22" y="196" font-family="Cormorant Garamond" font-size="16" fill="#C8A96E">£2,840</text>
+      </g>
+      <g opacity="0.7">
+        <rect x="360" y="120" width="110" height="44" rx="10" fill="#1C2420" stroke="rgba(94,158,126,0.2)" stroke-width="1"/>
+        <text x="372" y="138" font-family="DM Sans" font-size="9" fill="rgba(94,158,126,0.6)">HOME VALUE</text>
+        <text x="372" y="156" font-family="Cormorant Garamond" font-size="16" fill="#5E9E7E">£485,000</text>
+      </g>
+      <g opacity="0.6">
+        <rect x="355" y="300" width="120" height="44" rx="10" fill="#1C2420" stroke="rgba(200,169,110,0.15)" stroke-width="1"/>
+        <text x="367" y="318" font-family="DM Sans" font-size="9" fill="rgba(200,169,110,0.6)">SAVINGS GOAL</text>
+        <text x="367" y="336" font-family="Cormorant Garamond" font-size="16" fill="#C8A96E">18 Months</text>
+      </g>
+    </svg>
+  </div>
+
+  <!-- Stats bar -->
+  <div class="stats-bar">
+    <div class="stat-item"><div class="stat-num" data-count="4">0</div><div class="stat-label">Integrated Tools</div></div>
+    <div class="stat-item"><div class="stat-num" data-count="15">0</div><div class="stat-label">Inputs, Zero Jargon</div></div>
+    <div class="stat-item"><div class="stat-num">Real-time</div><div class="stat-label">Live Calculations</div></div>
+    <div class="stat-item"><div class="stat-num">Free</div><div class="stat-label">No Sign-up Needed</div></div>
+  </div>
+</section>
+
+<!-- ─── TOOLS SECTION ────────────────────────────────────────────────────── -->
+<section class="tools-section" id="tools">
+  <div class="section-label reveal">The FirstHome Toolkit</div>
+  <h2 class="section-title reveal">Four tools. One coherent<br>homebuying journey.</h2>
+
+  <div class="tab-nav reveal" id="tabNav">
+    <button class="tab-btn active" onclick="switchTab('affordability')">🏷️ Affordability</button>
+    <button class="tab-btn" onclick="switchTab('mortgage')">📊 Mortgage & EMI</button>
+    <button class="tab-btn" onclick="switchTab('rentvsbuy')">⚖️ Rent vs Buy</button>
+    <button class="tab-btn" onclick="switchTab('savings')">💰 Savings Goal</button>
+  </div>
+
+  <!-- ── TAB 1: AFFORDABILITY ───────────────────────────────────────────── -->
+  <div class="tab-panel active" id="tab-affordability">
+    <div class="card">
+      <div class="card-title">How much can you afford?</div>
+      <div class="card-subtitle">Based on your income, debts, and deposit available</div>
+
+      <div class="form-group">
+        <div class="form-label">Gross Annual Income <span id="af-income-val">£65,000</span></div>
+        <div class="slider-wrap">
+          <input type="range" id="af-income" min="20000" max="200000" step="1000" value="65000" oninput="updateAffordability()">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="form-label">Monthly Debts &amp; Outgoings <span id="af-debt-val">£400</span></div>
+        <div class="slider-wrap">
+          <input type="range" id="af-debt" min="0" max="3000" step="50" value="400" oninput="updateAffordability()">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="form-label">Deposit Available <span id="af-deposit-val">£50,000</span></div>
+        <div class="slider-wrap">
+          <input type="range" id="af-deposit" min="5000" max="200000" step="1000" value="50000" oninput="updateAffordability()">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="form-label">Interest Rate (%) <span id="af-rate-val">4.5%</span></div>
+        <div class="slider-wrap">
+          <input type="range" id="af-rate" min="1" max="10" step="0.1" value="4.5" oninput="updateAffordability()">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="form-label">Mortgage Term</div>
+        <select class="form-input" id="af-term" onchange="updateAffordability()">
+          <option value="15">15 Years</option>
+          <option value="20">20 Years</option>
+          <option value="25" selected>25 Years</option>
+          <option value="30">30 Years</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Your Buying Power</div>
+      <div class="card-subtitle">4.5× income multiplier with DTI stress testing</div>
+      <div class="chart-wrap">
+        <svg class="donut-svg" width="160" height="160" viewBox="0 0 160 160">
+          <circle class="donut-bg" cx="80" cy="80" r="64"/>
+          <circle class="donut-fill" id="donut-fill" cx="80" cy="80" r="64" stroke="var(--accent)" stroke-dasharray="402" stroke-dashoffset="402"/>
+        </svg>
+        <div class="donut-label">
+          <div class="donut-pct" id="dti-pct">—</div>
+          <div class="donut-sub">Debt-to-Income</div>
+        </div>
+      </div>
+      <div class="result-card">
+        <div class="result-label">Maximum Home Price</div>
+        <div class="result-value" id="af-max-price">£0</div>
+        <div class="result-sub">Conservative 4.5× income multiplier</div>
+      </div>
+      <div class="result-grid">
+        <div class="result-mini"><div class="label">Loan Amount</div><div class="value" id="af-loan">£0</div></div>
+        <div class="result-mini"><div class="label">Monthly EMI</div><div class="value" id="af-emi">£0</div></div>
+        <div class="result-mini"><div class="label">Deposit %</div><div class="value" id="af-dep-pct">0%</div></div>
+        <div class="result-mini"><div class="label">LTV Ratio</div><div class="value" id="af-ltv">0%</div></div>
+      </div>
+      <div class="progress-wrap" style="margin-top:20px">
+        <div class="progress-header"><span>Affordability Health</span><span id="af-health-label">—</span></div>
+        <div class="progress-bar"><div class="progress-fill gold" id="af-health-bar" style="width:0%"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── TAB 2: MORTGAGE ────────────────────────────────────────────────── -->
+  <div class="tab-panel" id="tab-mortgage">
+    <div class="card">
+      <div class="card-title">Mortgage &amp; Amortisation</div>
+      <div class="card-subtitle">See every payment, every month — principal vs interest</div>
+
+      <div class="form-group">
+        <div class="form-label">Home Price <span id="mo-price-val">£450,000</span></div>
+        <input type="range" id="mo-price" min="50000" max="2000000" step="5000" value="450000" oninput="updateMortgage()">
+      </div>
+      <div class="form-group">
+        <div class="form-label">Down Payment <span id="mo-down-val">£90,000</span></div>
+        <input type="range" id="mo-down" min="5000" max="500000" step="5000" value="90000" oninput="updateMortgage()">
+      </div>
+      <div class="form-group">
+        <div class="form-label">Annual Interest Rate <span id="mo-rate-val">4.5%</span></div>
+        <input type="range" id="mo-rate" min="0.5" max="12" step="0.1" value="4.5" oninput="updateMortgage()">
+      </div>
+      <div class="form-group">
+        <div class="form-label">Loan Term</div>
+        <select class="form-input" id="mo-term" onchange="updateMortgage()">
+          <option value="10">10 Years</option>
+          <option value="15">15 Years</option>
+          <option value="20">20 Years</option>
+          <option value="25" selected>25 Years</option>
+          <option value="30">30 Years</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Repayment Breakdown</div>
+      <div class="card-subtitle">First 6 months of your amortisation schedule</div>
+      <div class="result-card">
+        <div class="result-label">Monthly Payment</div>
+        <div class="result-value" id="mo-emi">£0</div>
+        <div class="result-sub" id="mo-payoff">Payoff date: —</div>
+      </div>
+      <div class="progress-wrap">
+        <div class="progress-header"><span>Interest (total)</span><span id="mo-int-pct">0%</span></div>
+        <div class="progress-bar"><div class="progress-fill red" id="mo-int-bar" style="width:0%"></div></div>
+      </div>
+      <div class="progress-wrap">
+        <div class="progress-header"><span>Principal (total)</span><span id="mo-prin-pct">0%</span></div>
+        <div class="progress-bar"><div class="progress-fill green" id="mo-prin-bar" style="width:0%"></div></div>
+      </div>
+      <div class="result-grid">
+        <div class="result-mini"><div class="label">Total Paid</div><div class="value" id="mo-total">£0</div></div>
+        <div class="result-mini"><div class="label">Total Interest</div><div class="value" id="mo-total-int" style="color:var(--red)">£0</div></div>
+      </div>
+      <div class="amort-preview">
+        <div class="amort-row header">
+          <span>Mo.</span><span>Payment</span><span>Principal</span><span>Interest</span>
+        </div>
+        <div id="amort-rows"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── TAB 3: RENT VS BUY ─────────────────────────────────────────────── -->
+  <div class="tab-panel" id="tab-rentvsbuy">
+    <div class="card">
+      <div class="card-title">Rent vs Buy Analysis</div>
+      <div class="card-subtitle">NPV-based wealth comparison over your time horizon</div>
+
+      <div class="form-group">
+        <div class="form-label">Home Purchase Price <span id="rvb-price-val">£400,000</span></div>
+        <input type="range" id="rvb-price" min="100000" max="1500000" step="10000" value="400000" oninput="updateRentVsBuy()">
+      </div>
+      <div class="form-group">
+        <div class="form-label">Down Payment <span id="rvb-down-val">£80,000</span></div>
+        <input type="range" id="rvb-down" min="10000" max="400000" step="5000" value="80000" oninput="updateRentVsBuy()">
+      </div>
+      <div class="form-group">
+        <div class="form-label">Monthly Rent (if renting) <span id="rvb-rent-val">£1,800</span></div>
+        <input type="range" id="rvb-rent" min="500" max="8000" step="50" value="1800" oninput="updateRentVsBuy()">
+      </div>
+      <div class="form-group">
+        <div class="form-label">Mortgage Rate <span id="rvb-rate-val">4.5%</span></div>
+        <input type="range" id="rvb-rate" min="1" max="10" step="0.1" value="4.5" oninput="updateRentVsBuy()">
+      </div>
+      <div class="form-group">
+        <div class="form-label">Home Appreciation / yr <span id="rvb-appr-val">3.0%</span></div>
+        <input type="range" id="rvb-appr" min="0" max="10" step="0.5" value="3.0" oninput="updateRentVsBuy()">
+      </div>
+      <div class="form-group">
+        <div class="form-label">Investment Return if Renting / yr <span id="rvb-inv-val">7.0%</span></div>
+        <input type="range" id="rvb-inv" min="1" max="15" step="0.5" value="7.0" oninput="updateRentVsBuy()">
+      </div>
+      <div class="form-group">
+        <div class="form-label">Time Horizon</div>
+        <select class="form-input" id="rvb-years" onchange="updateRentVsBuy()">
+          <option value="5">5 Years</option>
+          <option value="10" selected>10 Years</option>
+          <option value="15">15 Years</option>
+          <option value="20">20 Years</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">The Verdict</div>
+      <div class="card-subtitle">Total cost comparison — net of all cash flows</div>
+      <div class="result-grid" style="margin-bottom:16px">
+        <div class="result-mini"><div class="label">Total Buying Cost</div><div class="value" id="rvb-buy-cost" style="color:var(--red)">£0</div></div>
+        <div class="result-mini"><div class="label">Total Renting Cost</div><div class="value" id="rvb-rent-cost" style="color:var(--green)">£0</div></div>
+      </div>
+      <div class="result-card">
+        <div class="result-label">Net Wealth Difference</div>
+        <div class="result-value" id="rvb-diff">£0</div>
+        <div class="result-sub" id="rvb-diff-sub">—</div>
+      </div>
+      <div id="rvb-verdict" class="verdict neutral">
+        <div class="verdict-icon" id="rvb-icon">🤔</div>
+        <div class="verdict-text">
+          <strong id="rvb-title">Calculating...</strong>
+          <span id="rvb-explanation">Adjust inputs above to see analysis</span>
+        </div>
+      </div>
+      <div class="progress-wrap" style="margin-top:20px">
+        <div class="progress-header"><span>Buying Wealth Position</span><span id="rvb-buy-pct">—</span></div>
+        <div class="progress-bar"><div class="progress-fill gold" id="rvb-bar" style="width:0%"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── TAB 4: SAVINGS ─────────────────────────────────────────────────── -->
+  <div class="tab-panel" id="tab-savings">
+    <div class="card">
+      <div class="card-title">Down Payment Savings Planner</div>
+      <div class="card-subtitle">Work backwards from your target to a monthly plan</div>
+
+      <div class="form-group">
+        <div class="form-label">Target Home Price <span id="sv-price-val">£400,000</span></div>
+        <input type="range" id="sv-price" min="100000" max="2000000" step="10000" value="400000" oninput="updateSavings()">
+      </div>
+      <div class="form-group">
+        <div class="form-label">Target Deposit % <span id="sv-dep-val">20%</span></div>
+        <input type="range" id="sv-dep" min="5" max="40" step="1" value="20" oninput="updateSavings()">
+      </div>
+      <div class="form-group">
+        <div class="form-label">Current Savings <span id="sv-curr-val">£15,000</span></div>
+        <input type="range" id="sv-curr" min="0" max="200000" step="1000" value="15000" oninput="updateSavings()">
+      </div>
+      <div class="form-group">
+        <div class="form-label">Annual Return on Savings <span id="sv-ret-val">4.0%</span></div>
+        <input type="range" id="sv-ret" min="1" max="12" step="0.5" value="4.0" oninput="updateSavings()">
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Your Savings Roadmap</div>
+      <div class="card-subtitle">Monthly savings needed to reach your deposit</div>
+      <div class="result-card">
+        <div class="result-label">Deposit Target</div>
+        <div class="result-value" id="sv-target">£0</div>
+        <div class="result-sub" id="sv-remain">Still needed: £0</div>
+      </div>
+      <div class="milestones">
+        <div class="milestone">
+          <div class="milestone-icon" style="background:rgba(200,169,110,0.15)">⚡</div>
+          <div class="milestone-info">
+            <div class="milestone-name">Aggressive (1 yr)</div>
+            <div class="milestone-detail" id="sv-1yr-detail">Save monthly</div>
+          </div>
+          <div class="milestone-val" id="sv-1yr">£0/mo</div>
+        </div>
+        <div class="milestone">
+          <div class="milestone-icon" style="background:rgba(94,158,126,0.15)">🎯</div>
+          <div class="milestone-info">
+            <div class="milestone-name">Balanced (2 yr)</div>
+            <div class="milestone-detail" id="sv-2yr-detail">Save monthly</div>
+          </div>
+          <div class="milestone-val" id="sv-2yr">£0/mo</div>
+        </div>
+        <div class="milestone">
+          <div class="milestone-icon" style="background:rgba(94,94,180,0.15)">🌱</div>
+          <div class="milestone-info">
+            <div class="milestone-name">Patient (3 yr)</div>
+            <div class="milestone-detail" id="sv-3yr-detail">Save monthly</div>
+          </div>
+          <div class="milestone-val" id="sv-3yr">£0/mo</div>
+        </div>
+        <div class="milestone">
+          <div class="milestone-icon" style="background:rgba(192,96,96,0.15)">🕰️</div>
+          <div class="milestone-info">
+            <div class="milestone-name">Relaxed (5 yr)</div>
+            <div class="milestone-detail" id="sv-5yr-detail">Save monthly</div>
+          </div>
+          <div class="milestone-val" id="sv-5yr">£0/mo</div>
+        </div>
+      </div>
+      <div class="progress-wrap" style="margin-top:20px">
+        <div class="progress-header"><span>Progress to Goal</span><span id="sv-progress-pct">0%</span></div>
+        <div class="progress-bar"><div class="progress-fill gold" id="sv-progress-bar" style="width:0%"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── COMPARE SECTION ──────────────────────────────────────────────────── -->
+<section class="compare-section reveal" id="compare">
+  <div class="section-label">Competitive Comparison</div>
+  <h2 class="section-title">Why FirstHome wins where<br>others stop short.</h2>
+  <div class="compare-grid">
+    <div class="compare-col highlight">
+      <div class="compare-brand" style="color:var(--accent)">FirstHome</div>
+      <div class="compare-type">All-in-one Homebuyer Suite</div>
+      <div class="compare-feat"><span class="check">✓</span> Affordability Calculator</div>
+      <div class="compare-feat"><span class="check">✓</span> Full Amortisation Schedule</div>
+      <div class="compare-feat"><span class="check">✓</span> Rent vs Buy NPV Analysis</div>
+      <div class="compare-feat"><span class="check">✓</span> Savings Goal Planner</div>
+      <div class="compare-feat"><span class="check">✓</span> Real-time Updates</div>
+      <div class="compare-feat"><span class="check">✓</span> No Sign-up Required</div>
+      <div class="compare-feat"><span class="check">✓</span> Zero Ads</div>
+    </div>
+    <div class="compare-col">
+      <div class="compare-brand">NerdWallet</div>
+      <div class="compare-type">Financial Media Platform</div>
+      <div class="compare-feat"><span class="check">✓</span> Affordability Calculator</div>
+      <div class="compare-feat"><span class="partial">~</span> Basic Amortisation</div>
+      <div class="compare-feat"><span class="check">✓</span> Rent vs Buy (basic)</div>
+      <div class="compare-feat"><span class="cross">✗</span> Savings Goal Planner</div>
+      <div class="compare-feat"><span class="check">✓</span> Real-time Updates</div>
+      <div class="compare-feat"><span class="cross">✗</span> Sign-up Pushed</div>
+      <div class="compare-feat"><span class="cross">✗</span> Ad-supported</div>
+    </div>
+    <div class="compare-col">
+      <div class="compare-brand">Zillow</div>
+      <div class="compare-type">Property Marketplace</div>
+      <div class="compare-feat"><span class="check">✓</span> Affordability Calculator</div>
+      <div class="compare-feat"><span class="partial">~</span> Basic EMI only</div>
+      <div class="compare-feat"><span class="cross">✗</span> No Rent vs Buy NPV</div>
+      <div class="compare-feat"><span class="cross">✗</span> No Savings Planner</div>
+      <div class="compare-feat"><span class="check">✓</span> Real-time Updates</div>
+      <div class="compare-feat"><span class="cross">✗</span> Account Required</div>
+      <div class="compare-feat"><span class="cross">✗</span> Ad-heavy</div>
+    </div>
+    <div class="compare-col">
+      <div class="compare-brand">Bankrate</div>
+      <div class="compare-type">Rate Comparison Site</div>
+      <div class="compare-feat"><span class="partial">~</span> Limited Affordability</div>
+      <div class="compare-feat"><span class="check">✓</span> Amortisation Schedule</div>
+      <div class="compare-feat"><span class="cross">✗</span> No Rent vs Buy</div>
+      <div class="compare-feat"><span class="cross">✗</span> No Savings Planner</div>
+      <div class="compare-feat"><span class="check">✓</span> Real-time Updates</div>
+      <div class="compare-feat"><span class="cross">✗</span> Sign-up Pushed</div>
+      <div class="compare-feat"><span class="cross">✗</span> Ad-supported</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ───────────────────────────────────────────────────────────── -->
+<footer>
+  <div class="footer-logo">
+    <div class="logo-icon" style="width:28px;height:28px;font-size:14px">🏠</div>
+    FirstHome
+  </div>
+  <div class="footer-text">Built with financial clarity in mind. No ads. No data collection. Just answers.</div>
+  <div class="footer-text" style="color:var(--text3)">A FinTech Project — UCL MSc Business Analytics</div>
+</footer>
+
+<div class="toast" id="toast">✨ Updated</div>
+
+<script src="js/api.js"></script>
+<script src="js/ui.js"></script>
+<script>
+  // Smoke animation
+  document.querySelectorAll('.smoke').forEach((s,i) => {
+    s.style.animation = `smokeRise 3s ease-in-out ${i*0.8}s infinite`;
+  });
+</script>
+</body>
+</html>
